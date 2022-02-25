@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose --file docker-compose.yml convert
+    kompose.version: 1.22.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: api
+  name: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: api
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose --file docker-compose.yml convert
+        kompose.version: 1.22.0 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/apinetwork: "true"
+        io.kompose.service: api
+    spec:
+      containers:
+        - image: registry.overon.es/srt_api:dev-latest
+          name: srt-api
+          ports:
+            - containerPort: 5000
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/run/docker.sock
+              name: api-claim0
+      hostname: ovesrt-api
+      restartPolicy: Always
+      volumes:
+        - name: api-claim0
+          persistentVolumeClaim:
+            claimName: api-claim0
+status: {}

@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose --file docker-compose.yml convert
+    kompose.version: 1.22.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: bbdd
+  name: bbdd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: bbdd
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose --file docker-compose.yml convert
+        kompose.version: 1.22.0 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/apinetwork: "true"
+        io.kompose.service: bbdd
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_DATABASE
+              value: srt_db
+            - name: MYSQL_PASSWORD
+              value: rauldb
+            - name: MYSQL_ROOT_PASSWORD
+              value: mysql_p3dx
+            - name: MYSQL_USER
+              value: raul
+          image: registry.overon.es/bbdd_srt_api:dev-latest
+          name: srt-ddbb
+          ports:
+            - containerPort: 3306
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: bbdd
+      restartPolicy: Always
+      volumes:
+        - name: bbdd
+          persistentVolumeClaim:
+            claimName: bbdd
+status: {}

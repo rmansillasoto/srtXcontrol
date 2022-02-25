@@ -1,0 +1,64 @@
+version: "3"
+
+services:
+
+  bbdd:
+    image: bbdd_srt_api:dev-latest
+    container_name: srt_ddbb
+    restart: always
+    environment:
+      - MYSQL_DATABASE=srt_db
+      - MYSQL_ROOT_PASSWORD=mysql_p3dx
+      - MYSQL_USER=raul
+      - MYSQL_PASSWORD=rauldb
+    volumes:
+      - bbdd:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - apinetwork
+
+  api:
+    image: srt_api:dev-latest
+    container_name: srt_api
+    hostname: ovesrt-api
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock  
+    ports:
+      - 5000:5000
+    links:
+      - bbdd
+    networks:
+      - apinetwork
+
+  nginx:
+    image: nginx_srt_api:dev-latest
+    container_name: srt_nginx
+    restart: always
+    expose:
+      - "4000"
+    ports:
+      - "4000:4000"
+    networks:
+      - apinetwork
+    depends_on:
+      - api
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=bbdd
+    depends_on:
+      - bbdd
+    networks:
+        - apinetwork
+
+volumes:
+  bbdd:
+
+networks:
+  apinetwork:

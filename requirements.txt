@@ -1,0 +1,6 @@
+flask
+flask-mysqldb
+docker
+flask-jwt-extended
+PyJWT==1.7.1
+gunicorn
