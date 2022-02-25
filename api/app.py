@@ -62,7 +62,7 @@ def login():
     if not password:
         return jsonify({"Error": "Missing password parameter"}), 400
 
-    if username != 'titania' or password != 'titanios':
+    if username != 'admin' or password != 'password':
         return jsonify({"Error": "Bad username or password"}), 401
 
     #Hacemos que el token tenga una validez por X tiempo (ahora, una semana desde el momento en el que se crea)

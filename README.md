@@ -4,12 +4,12 @@ Chequear Issues en srt (por si hay algún problema que se pueda parecer a algo q
 
 - Endpoints reciben y envían JSON para la configuración o las respuestas de la API: 
     
-    @ [POST] login (http://10.40.80.166:4000/v1/login) para conseguir el token de acceso, “username”: “titania”, “password”: “titanios”
+    @ [POST] login (http://10.40.80.166:4000/v1/login) para conseguir el token de acceso, “username”: “admin”, “password”: “password”
 
         ```
         {
-	    "username": "titania",
-	    "password": "titanios"
+	    "username": "admin",
+	    "password": "password"
         }
         ```
 
