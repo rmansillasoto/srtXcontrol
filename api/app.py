@@ -36,8 +36,8 @@ jwt = JWTManager(app)
 logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] (%(threadName)-9s) %(message)s',)
 
 # Container versions
-srtContainerVersion = "registry.overon.es/srt_alpine:v142" #cambiado a 1.4.2 https://github.com/Haivision/srt/releases/tag/v1.4.2
-ffprobeContainerVersion = "registry.overon.es/ffprobe_alpine:v1"
+srtContainerVersion = "srt_alpine:v142" #cambiado a 1.4.2 https://github.com/Haivision/srt/releases/tag/v1.4.2
+ffprobeContainerVersion = "ffprobe_alpine:v1"
 
 # Create docker enviroment
 client = docker.from_env()
