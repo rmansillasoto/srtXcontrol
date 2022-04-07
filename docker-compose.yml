@@ -4,6 +4,9 @@ services:
 
   bbdd:
     image: bbdd_srt_api:dev-latest
+    build:
+      context: .
+      dockerfile: Dockerfile.bbdd
     container_name: srt_ddbb
     restart: always
     environment:
@@ -20,6 +23,9 @@ services:
 
   api:
     image: srt_api:dev-latest
+    build:
+      context: .
+      dockerfile: Dockerfile.multistage
     container_name: srt_api
     hostname: ovesrt-api
     restart: always
@@ -33,6 +39,9 @@ services:
       - apinetwork
 
   nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
     image: nginx_srt_api:dev-latest
     container_name: srt_nginx
     restart: always

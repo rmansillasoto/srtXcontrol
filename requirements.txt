@@ -1,6 +1,8 @@
-flask
+flask==2.0.2
 flask-mysqldb
 docker
 flask-jwt-extended
 PyJWT==1.7.1
 gunicorn
+Jinja2==3.0.3
+werkzeug==2.0.2
