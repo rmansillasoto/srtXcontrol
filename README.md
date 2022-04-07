@@ -4,6 +4,10 @@ API REST en Python/Flask + gunicorn + NGINX para manejar contenedores de SRT (ht
 
     For building the app you only need to run "docker-compose up --build"
 
+- Building needed containers (srt_alpine and ffprobe alpine folders):
+
+    - ffprobe: docker build -t ffprobe_alpine:v1
+    - srt v142: docker build -t srt_alpine:v142
 
 Chequear Issues en srt (por si hay algún problema que se pueda parecer a algo que nos pase -> https://github.com/Haivision/srt/issues)
 
