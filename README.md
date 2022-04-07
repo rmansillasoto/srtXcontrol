@@ -1,4 +1,4 @@
-API REST en Python/Flask + gunicorn + NGINX para manejar contenedores de SRT (https://github.com/Haivision/srt)
+API REST using Python/Flask + gunicorn + NGINX for managing docker containers -> SRT (https://github.com/Haivision/srt)
 
 - Building the app:
 
@@ -9,11 +9,11 @@ API REST en Python/Flask + gunicorn + NGINX para manejar contenedores de SRT (ht
     - ffprobe: docker build -t ffprobe_alpine:v1
     - srt v142: docker build -t srt_alpine:v142
 
-Chequear Issues en srt (por si hay algún problema que se pueda parecer a algo que nos pase -> https://github.com/Haivision/srt/issues)
+To avoid or fix issues in SRT source code, check SRT github repository fow new Issues -> https://github.com/Haivision/srt/issues)
 
-- Endpoints reciben y envían JSON para la configuración o las respuestas de la API: 
+- ENDPOINTS (JSON formatted): 
     
-    @ [POST] login (http://10.40.80.166:4000/v1/login) para conseguir el token de acceso, “username”: “admin”, “password”: “password”
+    @ [POST] login (http://localhost:4000/v1/login) to get access token, “username”: “admin”, “password”: “password”
 
         ```
         {
@@ -22,7 +22,7 @@ Chequear Issues en srt (por si hay algún problema que se pueda parecer a algo q
         }
         ```
 
-    - Devuelve:
+    - Returns:
 
             ```
             {
@@ -31,11 +31,11 @@ Chequear Issues en srt (por si hay algún problema que se pueda parecer a algo q
             }
             ```
 
-        Hay que incluír éste Token en las peticiones que queramos hacer para que funcione. Se haría en la petición Auth -> BearerToken -> campo Token
+        You must include returned token in the next requests adding it your API software -> Auth -> BearerToken -> Token
 
-    @ [GET] protected (http://10.40.80.166:4000/v1/protected) para testear que la validación del token ha funcionado.
+    @ [GET] protected (http://localhost:4000/v1/protected) just to test that you have set up the token correctly.
 
-    - Devuelve: 
+    - Returns: 
 
             ```
             {
@@ -43,9 +43,9 @@ Chequear Issues en srt (por si hay algún problema que se pueda parecer a algo q
             }
             ```
 
-    - ENDPOINTS RX (Si OK devuelven 200OK y un texto con nombre del servicio e ID, si van mal devuelven error 500 con alguna explicación. Las respuestas en JSON, excepto algunas de codigo o docker que pueden devolver en html con otros codigos.)
+    - ENDPOINTS RX
 
-        @ [POST] add_rx (http://10.40.80.166:4000/v1/add_rx)
+        @ [POST] add_rx (http://localhost:4000/v1/add_rx)
         ```
         {
             "ServiceName": "Test_3",
@@ -75,7 +75,7 @@ Chequear Issues en srt (por si hay algún problema que se pueda parecer a algo q
         }
         ```
 
-        @ [PUT] update_rx (http://10.40.80.166:4000/v1/update_rx/id)
+        @ [PUT] update_rx (http://localhost:4000/v1/update_rx/id)
         ```
         {
             "ServiceName": "Test_3",
@@ -105,9 +105,9 @@ Chequear Issues en srt (por si hay algún problema que se pueda parecer a algo q
         }
         ```
 
-        @ [DELETE] delete_rx (http://10.40.80.166:4000/v1/delete_rx/id)
+        @ [DELETE] delete_rx (http://localhost:4000/v1/delete_rx/id)
 
-        @ [GET] get_rx (http://10.40.80.166:4000/v1/get_rx)
+        @ [GET] get_rx (http://localhost:4000/v1/get_rx)
         ```
         [
             {
@@ -162,7 +162,7 @@ Chequear Issues en srt (por si hay algún problema que se pueda parecer a algo q
         ]
         ```
 
-        @ [GET] get_one_rx (http://10.40.80.166:4000/v1/get_rx/id)
+        @ [GET] get_one_rx (http://localhost:4000/v1/get_rx/id)
         ```
         {
             "Id": 5,
@@ -215,16 +215,16 @@ Chequear Issues en srt (por si hay algún problema que se pueda parecer a algo q
         }
         ```
 
-        @ [POST] start_rx (http://10.40.80.166:4000/v1/start_rx/id)
+        @ [POST] start_rx (http://localhost:4000/v1/start_rx/id)
 
-        @ [POST] stop_rx (http://10.40.80.166:4000/v1/stop_rx/id)
+        @ [POST] stop_rx (http://localhost:4000/v1/stop_rx/id)
 
-        @ [POST] restart_rx (http://10.40.80.166:4000/v1/restart_rx/id)
+        @ [POST] restart_rx (http://localhost:4000/v1/restart_rx/id)
 
 
-    - ENDPOINTS TX (Si OK devuelven 200OK y un texto con nombre del servicio e ID, si van mal devuelven error del rango 400 con alguna explicación. Las respuestas en JSON, excepto algunas de codigo o docker que pueden devolver en html con otros codigos.)
+    - ENDPOINTS TX:
 
-        @ [POST] add_tx (http://10.40.80.166:4000/v1/add_tx)
+        @ [POST] add_tx (http://localhost:4000/v1/add_tx)
         ```
         {
             "ServiceName": "TX_2",
@@ -249,7 +249,7 @@ Chequear Issues en srt (por si hay algún problema que se pueda parecer a algo q
         }
         ```
 
-        @ [PUT] update_tx (http://10.40.80.166:4000/v1/update_tx/id)
+        @ [PUT] update_tx (http://localhost:4000/v1/update_tx/id)
         ```
         {
             "ServiceName": "TX_2",
@@ -274,9 +274,9 @@ Chequear Issues en srt (por si hay algún problema que se pueda parecer a algo q
         }
         ```
 
-        @ [DELETE] delete_tx (http://10.40.80.166:4000/v1/delete_tx/id)
+        @ [DELETE] delete_tx (http://localhost:4000/v1/delete_tx/id)
 
-        @ [GET] get_tx (http://10.40.80.166:4000/v1/get_tx)
+        @ [GET] get_tx (http://localhost:4000/v1/get_tx)
         ```
         [
             {
@@ -322,7 +322,7 @@ Chequear Issues en srt (por si hay algún problema que se pueda parecer a algo q
         ]
         ```
 
-        @ [GET] get_one_tx (http://10.40.80.166:4000/v1/get_tx/id)
+        @ [GET] get_one_tx (http://localhost:4000/v1/get_tx/id)
         ```
         {
             "Id": 6,
@@ -366,11 +366,11 @@ Chequear Issues en srt (por si hay algún problema que se pueda parecer a algo q
         }
         ```
 
-        @ [POST] start_tx (http://10.40.80.166:4000/v1/start_tx/id)
+        @ [POST] start_tx (http://localhost:4000/v1/start_tx/id)
 
-        @ [POST] stop_tx (http://10.40.80.166:4000/v1/stop_tx/id)
+        @ [POST] stop_tx (http://localhost:4000/v1/stop_tx/id)
 
-        @ [POST] restart_tx (http://10.40.80.166:4000/v1/restart_tx/id)
+        @ [POST] restart_tx (http://localhost:4000/v1/restart_tx/id)
 
 
 Parámetros SRT:
@@ -534,6 +534,5 @@ Parámetros SRT:
 
 - ToDo:
  
-    - Probar FEC, los comandos no se rompen pero no se si funciona correctamente.
-    - Probar Bonding.
-    - Probar bien con Titania.
+    - Test FEC, commands seem to work fine but didn´t tested them correctly.
+    - Test Bonding.
