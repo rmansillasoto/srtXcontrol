@@ -43,7 +43,7 @@ To avoid or fix issues in SRT source code, check SRT github repository fow new I
 
             ```
             {
-            "Granted Access": "titania"
+            "Granted Access": "admin"
             }
             ```
 
