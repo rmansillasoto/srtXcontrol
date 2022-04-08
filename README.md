@@ -1,3 +1,7 @@
+# srtXcontrol
+
+[![License: MPLv2.0][license-badge]](./LICENSE)
+
 API REST using Python/Flask + gunicorn + NGINX for managing docker containers -> SRT (https://github.com/Haivision/srt)
 
 - Building the app:
