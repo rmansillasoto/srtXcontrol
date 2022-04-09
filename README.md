@@ -6,7 +6,7 @@ API REST using Python/Flask + gunicorn + NGINX for managing SRT docker container
 
 - Building the app:
 
-    For building the app you only need to run docker-compose up -d (containers are available in docker hub)
+    For building the app you only need to run "docker-compose up -d" (containers are available in docker hub)
 
 - Building needed containers (srt_alpine and ffprobe alpine folders):
 
