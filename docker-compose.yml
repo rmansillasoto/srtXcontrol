@@ -4,9 +4,6 @@ services:
 
   bbdd:
     image: rmansillasoto/bbdd_srtxcontol:latest
-    build:
-      context: .
-      dockerfile: Dockerfile.bbdd
     container_name: srt_ddbb
     restart: always
     environment:
@@ -23,9 +20,6 @@ services:
 
   api:
     image: rmansillasoto/app_srtxcontrol:latest
-    build:
-      context: .
-      dockerfile: Dockerfile.multistage
     container_name: srt_api
     hostname: ovesrt-api
     restart: always
@@ -39,9 +33,6 @@ services:
       - apinetwork
 
   nginx:
-    build:
-      context: .
-      dockerfile: Dockerfile.nginx
     image: rmansillasoto/nginx_srtxcontrol:latest
     container_name: srt_nginx
     restart: always
