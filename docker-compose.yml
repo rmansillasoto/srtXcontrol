@@ -3,7 +3,7 @@ version: "3"
 services:
 
   bbdd:
-    image: bbdd_srt_api:dev-latest
+    image: rmansillasoto/bbdd_srtxcontol:latest
     build:
       context: .
       dockerfile: Dockerfile.bbdd
@@ -22,7 +22,7 @@ services:
       - apinetwork
 
   api:
-    image: srt_api:dev-latest
+    image: rmansillasoto/app_srtxcontrol:latest
     build:
       context: .
       dockerfile: Dockerfile.multistage
@@ -42,7 +42,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.nginx
-    image: nginx_srt_api:dev-latest
+    image: rmansillasoto/nginx_srtxcontrol:latest
     container_name: srt_nginx
     restart: always
     expose:
