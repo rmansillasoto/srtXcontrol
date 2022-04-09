@@ -8,46 +8,35 @@ on:
 
 jobs:
 
-  login:
+  create_containers:
   
     runs-on: ubuntu-latest
+    name: Create Images
     steps:
-      -
-        name: Login to Docker Hub
+    
+      - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERUSER }}
           password: ${{ secrets.DOCKERTOKEN }}
+        
+      - name: Checkout
+        uses: actions/checkout@v3
+          
+      - name: Build App Image
+        run: docker build . --file Dockerfile.multistage --tag rmansillasoto/app_srtxcontrol:latest
+        
+      - name: Push App Image
+        run: docker push rmansillasoto/app_srtxcontrol:latest
 
-  build_app:
+      - name: Build DDBB Image
+        run: docker build . --file Dockerfile.bbdd --tag rmansillasoto/bbdd_srtxcontrol:latest
+        
+      - name: Push DDBB Image
+        run: docker push rmansillasoto/bbdd_srtxcontrol:latest
 
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build App Image
-      run: docker build . --file Dockerfile.multistage --tag rmansillasoto/app_srtxcontrol:latest
-    - name: Push App Image
-      run: docker push rmansillasoto/app_srtxcontrol:latest
-      
-  build_ddbb:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build DDBB Image
-      run: docker build . --file Dockerfile.bbdd --tag rmansillasoto/bbdd_srtxcontrol:latest
-    - name: Push DDBB Image
-      run: docker push rmansillasoto/bbdd_srtxcontrol:latest
-      
-  build_nginx:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build Nginx image
-      run: docker build . --file Dockerfile.nginx --tag rmansillasoto/nginx_srtxcontrol:latest
-    - name: Push Nginx Image
-      run: docker push rmansillasoto/nginx_srtxcontrol:latest
+      - name: Build Nginx image
+        run: docker build . --file Dockerfile.nginx --tag rmansillasoto/nginx_srtxcontrol:latest
+        
+      - name: Push Nginx Image
+        run: docker push rmansillasoto/nginx_srtxcontrol:latest
