@@ -1,8 +1,6 @@
 # srtXcontrol
 
-[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
-
-![Create Docker Containers](https://github.com/rmansillasoto/srtXcontrol/actions/workflows/create-srtxcontrol-containers.yml/badge.svg)
+[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)  ![Create Docker Containers](https://github.com/rmansillasoto/srtXcontrol/actions/workflows/create-srtxcontrol-containers.yml/badge.svg)
 
 API REST using Python/Flask + gunicorn + NGINX for managing SRT docker containers -> SRT (https://github.com/Haivision/srt)
 
